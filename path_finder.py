@@ -1,12 +1,14 @@
 from tree import Node
 
+
 class KnightPathFinder:
-    __slots__ = ['_root', '_considered_positions']
+    # __slots__ = ['_root', '_considered_positions']
+
     def __init__(self, pos):
-        self._root=Node(pos)
-        self._considered_positions={pos,}
+        self._root = Node(pos)
+        self._considered_positions = {pos, }
         # self._considered_positions=set(pos) ▶ also works
-        
+
     def get_valid_moves(self, pos):
         possibilities = [
             (2, 1), (2, -1), (-2, 1), (-2, -1),
@@ -17,7 +19,6 @@ class KnightPathFinder:
 
         for a, b in possibilities:
             new_pos = (x + a, y + b)
-            new_x, new_y = new_pos
             moves.append(new_pos)
 
         return moves
@@ -29,6 +30,17 @@ class KnightPathFinder:
         self._considered_positions = self._considered_positions | set(valid_moves)
         return filtered_moves
 
+    def build_move_tree(self):
+        queue = [self._root]
+
+        while queue:
+            current_node = queue.pop(0)
+            new_moves = self.new_move_positions(current_node.value)
+            for new_move in new_moves:
+                child = Node(new_move)
+                current_node.add_child(child)
+                queue.append(child)
+
 
 # Phase II:
 
@@ -37,8 +49,6 @@ class KnightPathFinder:
 
 # Phase III:
 
-
-
 # finder = KnightPathFinder((0, 0))
 # finder.build_move_tree()
-# print(finder._root.children)   # [<tree.Node object at 0x108fc6520>, <tree.Node object at 0x108fc6850>]
+# print(finder._root.children)                            # → [<tree.Node object at 0x108fc6520>, <tree.Node object at 0x108fc6850>]
