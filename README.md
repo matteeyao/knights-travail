@@ -1,4 +1,4 @@
-# Knight's Travails
+# Knight's Travail
 
 [![Python package](https://github.com/matteeyao/knights-travail/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/matteeyao/knights-travail/actions/workflows/build-and-test.yml)
 
