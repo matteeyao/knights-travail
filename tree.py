@@ -20,7 +20,7 @@ class Node:
 
     @parent.setter
     def parent(self, node):
-        if self._parent==node:
+        if self._parent == node:
             return
 
         if self._parent:
@@ -28,7 +28,7 @@ class Node:
 
         self._parent = node
 
-        if self._parent != None:
+        if self._parent is not None:
             self._parent.add_child(self)
 
     def add_child(self, node):
@@ -70,7 +70,7 @@ class Node:
         # return None
 
     def __repr__(self):
-        return f'<Node value: {self.value, parent: {self._parent.value}, children: {list(map(lambda x: x.value, self._children))}}s>'
+        return f'<Node value: {self.value}, parent: {self._parent.value}, children: {list(map(lambda x: x.value, self._children))}s>'
 
 
 # Phase I:
