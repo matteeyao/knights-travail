@@ -19,13 +19,14 @@ class KnightPathFinder:
 
         for a, b in possibilities:
             new_pos = (x + a, y + b)
-            moves.append(new_pos)
+            new_x, new_y = new_pos
+            if new_x in range(8) and new_y in range(8):
+                moves.append(new_pos)
 
         return moves
 
     def new_move_positions(self, pos):
-        moves = self.get_valid_moves(pos)
-        valid_moves = [pos for pos in moves if pos[0] in range(8) and pos[1] in range(8)]
+        valid_moves = self.get_valid_moves(pos)
         filtered_moves = set(valid_moves) - self._considered_positions
         self._considered_positions = self._considered_positions | set(valid_moves)
         return filtered_moves
@@ -41,6 +42,19 @@ class KnightPathFinder:
                 current_node.add_child(child)
                 queue.append(child)
 
+    def find_path(self, end_position):
+        end_node = self._root.depth_search(end_position)
+        path = [node.value for node in self.trace_to_root(end_node)]
+        return path
+
+    def trace_to_root(self, end_node):
+        path_list = []
+        current_node = end_node
+        while current_node:
+            path_list.append(current_node)
+            current_node = current_node.parent
+        return path_list[::-1]
+
 
 # Phase II:
 
@@ -52,3 +66,12 @@ class KnightPathFinder:
 # finder = KnightPathFinder((0, 0))
 # finder.build_move_tree()
 # print(finder._root.children)                            # → [<tree.Node object at 0x108fc6520>, <tree.Node object at 0x108fc6850>]
+
+# Phase IV:
+
+# finder = KnightPathFinder((0, 0))
+# finder.build_move_tree()
+# print(finder.find_path((2, 1)))                         #  → [(0, 0), (2, 1)]
+# print(finder.find_path((3, 3)))                         #  → [(0, 0), (2, 1), (3, 3)]
+# print(finder.find_path((6, 2)))                         #  → [(0, 0), (1, 2), (2, 4), (4, 3), (6, 2)]
+# print(finder.find_path((7, 6)))                         #  → [(0, 0), (1, 2), (2, 4), (4, 3), (5, 5), (7, 6)]
