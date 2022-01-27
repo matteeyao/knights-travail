@@ -1,5 +1,7 @@
 # Knight's Travails
 
+[![Python package](https://github.com/matteeyao/knights-travail/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/matteeyao/knights-travail/actions/workflows/build-and-test.yml)
+
 In this project we will create a class that will find the shortest path for a Chess Knight from a starting position to an end position. Both the start and end positions should be on a standard eight-by-eight chess board
 
 At the end of this project, you should be able to bring together lots that you've learned, this week, as well as bringing back information you learned earlier in the course, such as:
